@@ -6,6 +6,7 @@
   "spacing": 0,
   "modules-left": [
     "hyprland/workspaces",
+    "wlr/taskbar",
     "hyprland/window"
   ],
   "modules-center": [
@@ -25,6 +26,14 @@
   "hyprland/workspaces": {
     "format": "{id:02d}",
     "on-click": "activate"
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 16,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close"
   },
 
   "hyprland/window": {

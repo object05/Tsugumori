@@ -55,6 +55,38 @@ window#waybar {
   color: @ts_red;
 }
 
+/* One icon per open window; the focused one gets a red underline. */
+#taskbar {
+  padding: 0 6px;
+  border-left: 1px solid @ts_line;
+}
+
+#taskbar button {
+  min-width: 30px;
+  padding: 0 4px;
+  background-color: transparent;
+  background-image: none;
+  border-bottom: 2px solid transparent;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+#taskbar button:hover {
+  background-color: rgba(204, 21, 21, 0.13);
+}
+
+#taskbar button.active {
+  border-bottom: 2px solid @ts_red;
+}
+
+#taskbar button.minimized {
+  opacity: 0.5;
+}
+
+#taskbar.empty {
+  border-left: none;
+  padding: 0;
+}
+
 #window {
   color: @ts_text;
   padding: 0 13px;
