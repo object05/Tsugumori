@@ -6,6 +6,7 @@
   "spacing": 0,
   "modules-left": [
     "hyprland/workspaces",
+    "group/pinned",
     "wlr/taskbar",
     "hyprland/window"
   ],
@@ -13,12 +14,14 @@
     "custom/sidonia"
   ],
   "modules-right": [
+    "tray",
     "custom/kb-layout",
     "cpu",
     "memory",
     "network",
     "pulseaudio",
     "battery",
+    "custom/vault",
     "clock",
     "custom/power"
   ],
@@ -28,12 +31,39 @@
     "on-click": "activate"
   },
 
+  "group/pinned": {
+    "orientation": "horizontal",
+    "modules": ["image#brave", "image#files", "image#discord"]
+  },
+
+  "image#brave": {
+    "exec": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/pinned.py icon brave-browser",
+    "size": 16,
+    "interval": 3600,
+    "on-click": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/pinned.py open brave-browser"
+  },
+
+  "image#files": {
+    "exec": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/pinned.py icon org.gnome.Nautilus",
+    "size": 16,
+    "interval": 3600,
+    "on-click": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/pinned.py open org.gnome.Nautilus"
+  },
+
+  "image#discord": {
+    "exec": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/pinned.py icon discord",
+    "size": 16,
+    "interval": 3600,
+    "on-click": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/pinned.py open discord"
+  },
+
   "wlr/taskbar": {
     "format": "{icon}",
     "icon-size": 16,
     "tooltip-format": "{title}",
     "on-click": "activate",
-    "on-click-middle": "close"
+    "on-click-middle": "close",
+    "ignore-list": ["brave-browser", "org.gnome.Nautilus", "discord"]
   },
 
   "hyprland/window": {
@@ -41,11 +71,25 @@
     "max-length": 32
   },
 
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+
   "custom/kb-layout": {
     "exec": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/kb-layout.py",
     "return-type": "json",
     "restart-interval": 5,
     "on-click": "hyprctl switchxkblayout all next"
+  },
+
+  "custom/vault": {
+    "exec": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/vault.py",
+    "return-type": "json",
+    "interval": 5,
+    "signal": 8,
+    "on-click": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/vault.py toggle; pkill -RTMIN+8 waybar",
+    "on-click-right": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/vault.py browse"
   },
 
   "cpu": {

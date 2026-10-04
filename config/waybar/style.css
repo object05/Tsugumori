@@ -55,6 +55,22 @@ window#waybar {
   color: @ts_red;
 }
 
+/* Pinned launchers: always shown, open or focus their app. */
+#pinned {
+  padding: 0 6px;
+  border-left: 1px solid @ts_line;
+}
+
+#pinned #image {
+  min-width: 30px;
+  padding: 0 4px;
+  transition: background-color 150ms ease;
+}
+
+#pinned #image:hover {
+  background-color: rgba(204, 21, 21, 0.13);
+}
+
 /* One icon per open window; the focused one gets a red underline. */
 #taskbar {
   padding: 0 6px;
@@ -92,6 +108,40 @@ window#waybar {
   padding: 0 13px;
 }
 
+#tray {
+  padding: 0 12px;
+  border-right: 1px solid @ts_line;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: alpha(@ts_red, 0.27);
+}
+
+#tray menu {
+  background-color: @ts_bg;
+  border: 1px solid @ts_line;
+  color: @ts_text;
+  padding: 4px 0;
+}
+
+#tray menu menuitem {
+  padding: 4px 10px;
+}
+
+#tray menu menuitem:hover {
+  background-color: @ts_red;
+  color: @ts_bg;
+}
+
+#tray menu menuitem:disabled {
+  color: @ts_muted;
+}
+
 #custom-sidonia {
   font-size: 11px;
   padding: 0 18px;
@@ -103,7 +153,8 @@ window#waybar {
 #memory,
 #network,
 #pulseaudio,
-#battery {
+#battery,
+#custom-vault {
   color: @ts_text;
   font-weight: 500;
   padding: 0 12px;
@@ -134,6 +185,24 @@ window#waybar {
 }
 
 #pulseaudio.muted:hover {
+  color: @ts_bg;
+}
+
+#custom-vault {
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+#custom-vault:hover {
+  color: @ts_bg;
+  background-color: @ts_red;
+}
+
+/* Unlocked is the state worth noticing. */
+#custom-vault.unlocked {
+  color: @ts_red;
+}
+
+#custom-vault.unlocked:hover {
   color: @ts_bg;
 }
 
