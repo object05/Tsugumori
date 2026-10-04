@@ -18,6 +18,7 @@
     "custom/kb-layout",
     "cpu",
     "memory",
+    "custom/disks",
     "network",
     "pulseaudio",
     "battery",
@@ -100,6 +101,12 @@
   "memory": {
     "format": "<span foreground='#c8c8c4'>MEM</span> <span weight='medium'>{percentage}</span><span foreground='#c8c8c4'>%</span>",
     "interval": 3
+  },
+
+  "custom/disks": {
+    "exec": "${XDG_CONFIG_HOME:-$HOME/.config}/waybar/scripts/disks.py",
+    "return-type": "json",
+    "interval": 30
   },
 
   "network": {

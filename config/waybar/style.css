@@ -151,6 +151,7 @@ window#waybar {
 #custom-kb-layout,
 #cpu,
 #memory,
+#custom-disks,
 #network,
 #pulseaudio,
 #battery,
@@ -180,7 +181,8 @@ window#waybar {
 }
 
 #pulseaudio.muted,
-#network.disconnected {
+#network.disconnected,
+#custom-disks.warning {
   color: @ts_red;
 }
 
