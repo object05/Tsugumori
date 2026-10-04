@@ -1,7 +1,8 @@
 """Tsugumori appearance, isolated to Nautilus's existing process.
 
 Native file operations and controls remain intact. GTK events drive the
-cosmetic adjustments; there is no polling or animation timer.
+cosmetic adjustments; there is no polling or animation timer. The context
+menu gains "Open in Terminal" for local folders.
 """
 
 import ctypes
@@ -216,8 +217,20 @@ class TsugumoriTheme(GObject.GObject, Nautilus.MenuProvider):
         elif not divided:
             row.set_header(None)
 
-    def get_file_items(self, *_args):
-        return []
+    @staticmethod
+    def _terminal_item(name, folder):
+        path = folder.get_location().get_path() if folder.is_directory() else None
+        if not path:
+            return []  # Remote and virtual locations have no local directory.
+        item = Nautilus.MenuItem(name=name, label="Open in Terminal", icon="utilities-terminal")
+        item.connect("activate", lambda *_: Gio.Subprocess.new(
+            ["kitty", "--single-instance", "--directory", path], Gio.SubprocessFlags.NONE))
+        return [item]
 
-    def get_background_items(self, *_args):
-        return []
+    def get_file_items(self, files):
+        if len(files) != 1:
+            return []
+        return self._terminal_item("Tsugumori::OpenTerminalHere", files[0])
+
+    def get_background_items(self, folder):
+        return self._terminal_item("Tsugumori::OpenTerminal", folder)
