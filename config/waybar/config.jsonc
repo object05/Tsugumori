@@ -135,8 +135,8 @@
   },
 
   "clock": {
-    "format": "{:%H:%M}",
-    "format-alt": "{:%d/%m}",
+    "format": "{:%a %d/%m  %H:%M}",
+    "format-alt": "{:%H:%M}",
     "tooltip-format": "{:%A %d %B %Y}"
   },
 
